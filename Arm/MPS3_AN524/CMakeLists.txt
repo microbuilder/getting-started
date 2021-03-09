@@ -21,7 +21,13 @@ endif()
 include(${GSG_BASE_DIR}/cmake/utilities.cmake)
 
 # Define the Project
-project(mps3_an524_azure C ASM)
+# project(mps3_an524_azure C ASM)
+# Changing project name to mps3_524 to ensure generated binaries are conforming
+# to 8.3 naming convention
+project(mps3_524 C ASM)
+
+# Exceptions required by CMSIS UART driver
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-ignored-qualifiers -Wno-return-type")
 
 # add_subdirectory(${CORE_SRC_DIR} core_src)
 add_subdirectory(lib)
