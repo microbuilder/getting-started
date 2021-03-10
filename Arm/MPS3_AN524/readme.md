@@ -58,15 +58,17 @@ $ pyocd gdbserver --target=sse-200-mps3
 Then in another terminal:
 
 ```bash
-$ gdb
-(gdb) target remote localhost:3333
-...
+$ arm-none-eabi-gdb-py -s build/app/mps3_524.elf \
+  -ex "target remote tcp:localhost:3333"
+(gdb) monitor reset halt
+(gdb) break main
+(gdb) continue
 ```
 
 > Please note that there is a known issue with resetting the AN524 with the
   debugger (https://github.com/pyocd/pyOCD/issues/1078). The `pyocd_user.py`
-  script in this `Arm/MPS3_AN524` folder provides a workaround for this issue,
-  and pyocd should be run from the folder where this script is located.
+  script in this folder (`Arm/MPS3_AN524`) provides a workaround for this
+  issue, and pyocd should be run from the folder where this script is located.
 
 ## Building the Sample
 
