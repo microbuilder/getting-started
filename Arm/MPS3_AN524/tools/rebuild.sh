@@ -22,3 +22,8 @@ cmake -B"$BUILDDIR" -GNinja -DCMAKE_TOOLCHAIN_FILE=$BASEDIR/../../cmake/arm-gcc-
 
 # And then do the build
 cmake --build $BUILDDIR
+
+# Check if build succeeded
+if [ $? -eq 0 ]; then
+    [ "$1" = "-f" ] && python3 $SCRIPTDIR/flash.py
+fi
