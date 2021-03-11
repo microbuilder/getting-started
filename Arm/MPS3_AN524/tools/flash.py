@@ -3,10 +3,10 @@
 import pathlib
 import serial
 import shutil
+import sys
 import time
 
-# Serial port name and baudrate
-SERIAL_PORT = "/dev/tty.usbserial-14543100"
+# Serial baudrate
 SERIAL_BAUDRATE = 115200
 
 # Path to image file
@@ -14,11 +14,13 @@ BIN_FILE = pathlib.Path(__file__).parent.absolute().parent / "build" / "app" / "
 # Path where image file should be copied
 BIN_DEST_PATH = "/Volumes/V2M-MPS3/SOFTWARE"
 
-def initiate_reboot():
+def initiate_reboot(port):
     try:
-        serial_port = serial.Serial(SERIAL_PORT, SERIAL_BAUDRATE, exclusive=False)
+        serial_port = serial.Serial(port, SERIAL_BAUDRATE, exclusive=False)
     except serial.SerialException:
-        print("Unable to open serial port " + SERIAL_PORT)
+        print("ERROR: Unable to update application image onto FPGA board")
+        print(f"ERROR: Unable to open serial port {port}")
+        sys.exit(1)
     else:
         # Send reboot command to mcc terminal
         # Wring the string `reboot\n` is causing data loss. Therefore send
@@ -39,13 +41,15 @@ def initiate_reboot():
         serial_port.write(b'\n')
 
 def copy_application_image():
-    shutil.copy(BIN_FILE, BIN_DEST_PATH)
-
+    try:
+        shutil.copy2(BIN_FILE, BIN_DEST_PATH, follow_symlinks=False)
+    except OSError as e:
+        print("ERROR: Unable to update application image onto FPGA board")
+        print(f"ERROR: {e.strerror} : {e.filename}")
+        sys.exit(1)
 
 if __name__ == '__main__':
     # Copy application image onto USB drive
     copy_application_image()
-    # Sleep for a second
-    time.sleep(1)
     # Initiate reboot
-    initiate_reboot()
+    initiate_reboot(sys.argv[1])
