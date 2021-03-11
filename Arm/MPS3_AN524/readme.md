@@ -87,14 +87,16 @@ $ tools/rebuild.sh
 ```
 
 ## Updating application image
-> This has only been tested on OS X, some modifications might be need to make
+> This has only been tested on OS X, some modifications might be needed to make
   `Arm/MPS3_AN524/tools/flash.py` to work in Windows/Linux environments.
 
 The python script `Arm/MPS3_AN524/tools/flash.py` automates steps needed to
 update an application image onto the Arm MPS3 FPGA Prototyping Board. if you
 wish to use this, then add `-f` command line option while invoking `rebuild.sh`.
+If `-f` option is used then FPGA MCC serial port must be provided using `-p`
+option.
 
 ```bash
 $ cd Arm/MPS3_AN524
-$ tools/rebuild.sh -f
+$ tools/rebuild.sh -f -p /dev/tty.usbserial-14543100
 ```
