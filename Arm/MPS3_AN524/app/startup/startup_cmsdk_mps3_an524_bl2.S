@@ -24,8 +24,8 @@
 
     .section .vectors
     .align 2
-    .globl    __Vectors
-__Vectors:
+    .globl    _vectors
+_vectors:
     .long    Image$$ARM_LIB_STACK$$ZI$$Limit   /* Top of Stack */
 
     /* Core interrupts */
@@ -175,7 +175,7 @@ __Vectors:
     .long    UART5_Handler                   /* 126 */
     .long    HDLCD_Handler                  /* 127 */
 
-    .size    __Vectors, . - __Vectors
+    .size    _vectors, . - _vectors
 
     .text
     .thumb

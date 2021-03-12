@@ -40,9 +40,10 @@ SECTIONS
 {
     .text :
     {
+        __Vectors_Start = .;
         KEEP(*(.vectors))
         __Vectors_End = .;
-        __Vectors_Size = __Vectors_End - __Vectors;
+        __Vectors_Size = __Vectors_End - __Vectors_Start;
         __end__ = .;
 
         *(.text*)
@@ -179,6 +180,7 @@ SECTIONS
         __heap_limit = .; /* Add for _sbrk */
     } > RAM
     Image$$ARM_LIB_HEAP$$ZI$$Limit = ADDR(.heap) + SIZEOF(.heap);
+    __RAM_segment_used_end__ = .;
 
     PROVIDE(__stack = Image$$ARM_LIB_STACK$$ZI$$Limit);
 }
