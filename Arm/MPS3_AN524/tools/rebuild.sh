@@ -56,7 +56,7 @@ mkdir -p $BUILDDIR
 rm -rf $BUILDDIR/*
 
 # Generate the build system using Ninja
-cmake -B"$BUILDDIR" -GNinja -DCMAKE_TOOLCHAIN_FILE=$BASEDIR/../../core/lib/threadx/cmake/cortex_m33.cmake $BASEDIR
+cmake -B"$BUILDDIR" -GNinja $BASEDIR
 
 # And then do the build
 cmake --build $BUILDDIR

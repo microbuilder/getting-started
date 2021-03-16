@@ -33,8 +33,6 @@ void tx_application_define(void* first_unused_memory);
 
 void azure_thread_entry(ULONG parameter)
 {
-    UINT status;
-
     printf("\r\nStarting Azure thread\r\n\r\n");
 }
 
