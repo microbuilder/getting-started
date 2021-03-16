@@ -42,7 +42,7 @@ if [ "$flash_option" = true ] && [ "$serial_port" = "" ]; then
 fi
 
 # Use paths relative to this script's location
-SCRIPT=$(greadlink -f "$0")
+SCRIPT=$(realpath "$0")
 SCRIPTDIR=$(dirname "$SCRIPT")
 BASEDIR=$(dirname "$SCRIPTDIR")
 
