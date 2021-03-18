@@ -19,6 +19,7 @@ target_link_libraries(${PROJECT_NAME}
         # app_common
         # jsmn
         AN524
+        tfm_api
         # netx_driver
 )
 
@@ -36,3 +37,10 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC 
         .
 )
+
+trusted_firmware_build(BINARY_DIR ${CMAKE_BINARY_DIR}/tfm
+                       BOARD mps3/an524
+                       IPC
+                       ISOLATION_LEVEL 1
+                       BL2
+                       ENABLED_PARTITIONS TFM_PARTITION_PLATFORM TFM_PARTITION_CRYPTO)
