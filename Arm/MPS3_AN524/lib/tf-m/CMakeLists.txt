@@ -86,8 +86,8 @@ function(trusted_firmware_build)
     set(MCUBOOT_IMAGE_NUM_ARG -DMCUBOOT_IMAGE_NUMBER=${TFM_MCUBOOT_IMAGE_NUMBER})
   endif()
 
-  set(VENEERS_FILE ${TFM_BINARY_DIR}/secure_fw/s_veneers.o)
-  set(PSA_API_NS_PATH ${TFM_BINARY_DIR}/interface/libpsa_api_ns.a)
+  set(VENEERS_FILE ${TFM_BINARY_DIR}/install/interface/lib/s_veneers.o)
+  set(PSA_API_NS_PATH ${TFM_BINARY_DIR}/app/libtfm_api_ns.a)
   set(TFM_GENERATED_INCLUDES ${TFM_BINARY_DIR}/generated/interface/include)
 
   if(TFM_BL2)
@@ -186,8 +186,6 @@ function(trusted_firmware_build)
   )
 
   target_link_libraries(tfm_api
-    PUBLIC
-    threadx_interface
     INTERFACE
     ${PSA_API_NS_PATH}
     ${VENEERS_FILE}
