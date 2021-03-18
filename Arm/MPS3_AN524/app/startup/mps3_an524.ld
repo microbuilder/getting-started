@@ -24,8 +24,8 @@
 
 MEMORY
 {
-    FLASH (rx)  : ORIGIN = 0x10000000, LENGTH = 0x40000   /* 256 KB */
-    RAM   (rwx) : ORIGIN = 0x30000000, LENGTH = 0x20000   /* 128 KB */
+    FLASH (rx)  : ORIGIN = 0x000C0000, LENGTH = 0x40000   /* 256 KB */
+    RAM   (rwx) : ORIGIN = 0x20018000, LENGTH = 0x20000   /* 128 KB */
 }
 
 __heap_size__ = 0x0001000;
